@@ -2,20 +2,22 @@ import React from 'react'
 import { AutoComplete, Input, Space, Typography } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux';
-import { actions } from '../state';
+import { fetchAutoComplete, setValue } from '../state';
+// import { actions } from '../state';
 
 export default function SearchInput() {
     const keyword = useSelector(state => state.search.keyword);
     const dispatch = useDispatch();
     function setKeyword(value){
-        console.log(value)
         if(value !== keyword){
-            dispatch(actions.setValue('keyword', value));
-            dispatch(actions.fetchAutoComplete(value));
+            console.log(dispatch(setValue('keyword', value)))
+            console.log(dispatch(fetchAutoComplete(value)))
+            
         }
     }
 
     const autoCompletes = useSelector(state => state.search.autoCompletes)
+    console.log(autoCompletes)
     function gotoUser(value){}
 
     return (
