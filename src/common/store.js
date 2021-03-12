@@ -3,9 +3,11 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import searchReducer from '../search/state';
 import searchSage from '../search/state/saga';
+import useReducer from '../user/state';
 
 const reducer = combineReducers({
-  search:searchReducer,
+  search: searchReducer,
+  user: useReducer
 });
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

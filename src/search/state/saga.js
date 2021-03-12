@@ -3,9 +3,7 @@ import { autoCompletes_add } from '.';
 import {callApi} from '../../common/util/api';
 
 function* fetchAutoComplete({payload}){
-    console.log(payload)
     const {keyword} = payload
-    console.log(keyword)
     const {isSuccess, data} = yield call(callApi, {
         url: '/user/search',
         params: {keyword},
