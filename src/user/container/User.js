@@ -11,16 +11,14 @@ import { fetchUser } from '../state';
  */
 
 export default function User({match}) {
-    console.log(match)
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.user);
-    console.log(user)
 
     const name = match.params.name;
 
     useEffect(() => {
-        dispatch(fetchUser(name))
+        console.log(dispatch(fetchUser(name)))
     }, [name])
 
     const isFetched = true;

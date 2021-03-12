@@ -1,9 +1,9 @@
 import produce from 'immer';
 
-export const USER = 'user/USER'
-export const FETCHUSER = 'user/FETCHUSER';
+export const USER = 'user/USER' //user 데이터 저장
+export const FETCHUSER = 'user/FETCHUSER'; //user name 값
 
-export const user = (name) => ({type: USER, payLoad: {name}})
+export const user_data = (user) => ({type: USER, payLoad: {user}})
 export const fetchUser = (name) => ({type: FETCHUSER, payLoad: {name}})
 
 const INITIAL_STATE = {
@@ -14,11 +14,7 @@ function useReducer(state = INITIAL_STATE, action ){
     switch(action.type) {
         case USER:
             return produce(state, draft => {
-                draft.user = action.payLoad.name
-            })
-        case FETCHUSER :
-            return produce(state, draft => {
-                draft.user = action.payLoad.name
+                draft.user = action.payLoad.user
             })
         default :
             return state;

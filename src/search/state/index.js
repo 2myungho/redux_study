@@ -43,16 +43,23 @@ function searchReducer(state = INITIAL_STATE, action) {
         case INPUT_CHANGE:
             return produce(state, draft => {
                 draft.keyword = action.payload.keyword
+                console.log("인풋 리듀서")
+                console.log(state)
             })
         case AUTOCOMPLETES_ADD:
             return produce(state, draft => {
                 draft.autoCompletes = action.payload.autoCompletes
+                console.log("콤플리츠 리듀서")
+                console.log(state)
             })
         case FETCHAUTOCOMPLETES:
             return produce(state, draft => {
                 draft.keyword = action.payload.keyword
+                console.log("패치 리듀서")
+                console.log(state)
             })
         default:
+            console.log("default 리듀서")
             return state;
     }   
 

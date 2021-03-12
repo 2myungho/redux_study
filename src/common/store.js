@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import searchReducer from '../search/state';
 import searchSage from '../search/state/saga';
+import userSaga from '../user/state/saga';
 import useReducer from '../user/state';
 
 const reducer = combineReducers({
@@ -17,7 +18,7 @@ const store = createStore(
 );
 
 function* rootSaga() {
-  yield all([searchSage()]);
+  yield all([searchSage(),userSaga() ]);
 }
 sagaMiddleware.run(rootSaga);
 
