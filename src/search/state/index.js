@@ -1,29 +1,57 @@
-export const SETVALUE = 'search/VALUE';
-export const FETCHAUTOCOMPLETES = 'search/FETCHAUTOCOMPLETES';
+import produce from 'immer';
 
-export const setValue = (key,value) => ({type: SETVALUE, key, value})
-export const fetchAutoComplete = keyword => ({
-    type: FETCHAUTOCOMPLETES,
-    keyword
-})
+export const INPUT_CHANGE = 'search/INPUT_CHANGE';
+export const AUTOCOMPLETES_ADD = 'search/AUDOAUTOCOMPLETES_ADD' //서버 데이터 저장
+export const FETCHAUTOCOMPLETES = 'search/FETCHAUTOCOMPLETES'; //api호출
+
+export const input_change = (keyword) => ({type: INPUT_CHANGE, payload: {keyword}})
+export const autoCompletes_add = (autoCompletes) => ({type: AUTOCOMPLETES_ADD, payload: {autoCompletes}})
+export const fetchAutoComplete = keyword => ({type: FETCHAUTOCOMPLETES, payload: {keyword}})
 
 const INITIAL_STATE = {
     keyword: '',
     autoCompletes: [],
 };
+// function searchReducer(state = INITIAL_STATE, action) {
+//     switch(action.type) {
+//         case INPUT_CHANGE:
+//             return {
+//                 ...state,
+//                 keyword: action.keyword
+//             }
+//         case AUTOCOMPLETES_ADD:
+//             return {
+//                 ...state,
+//                 autoCompletes: action.autoCompletes
+//             }
+//         case FETCHAUTOCOMPLETES:
+//             return {
+//                 ...state,
+//                 keyword: action.keyword
+//             }
+//         default:
+//             return state;
+//     }   
+
+// }
+
+// export default searchReducer;
+
+
 function searchReducer(state = INITIAL_STATE, action) {
     switch(action.type) {
-        case SETVALUE:
-            return {
-                ...state,
-                key: action.key,
-                value: action.value
-            }
-        // case FETCHAUTOCOMPLETES:
-        //     return {
-        //         ...state,
-        //         keyword: action.keyword
-        //     }
+        case INPUT_CHANGE:
+            return produce(state, draft => {
+                draft.keyword = action.payload.keyword
+            })
+        case AUTOCOMPLETES_ADD:
+            return produce(state, draft => {
+                draft.autoCompletes = action.payload.autoCompletes
+            })
+        case FETCHAUTOCOMPLETES:
+            return produce(state, draft => {
+                draft.keyword = action.payload.keyword
+            })
         default:
             return state;
     }   
@@ -31,35 +59,3 @@ function searchReducer(state = INITIAL_STATE, action) {
 }
 
 export default searchReducer;
-
-import { bindActionCreators } from "redux";
-import {
-    createReducer,
-    createSetValueAction,
-    setValueReducer,
-} from '../../common/redux-helper';
-
-export const Types = {
-    SetValue: 'search/SetValue',
-    FetchAutoComplete: 'search/FetchAutoComplate',
-};
-
-export const actions = {
-    setValue: createSetValueAction(Types.SetValue),
-    fetchAutoComplete: keyword => ({
-        type: Types.FetchAutoComplete,
-        keyword,
-    })
-}
-
-const INITIAL_STATE = {
-    keyword: '',
-    autoCompletes: [],
-};
-const reducer = createReducer(INITIAL_STATE, {
-    [Types.SetValue]: setValueReducer,
-}) 
-
-
-
-export default reducer;
