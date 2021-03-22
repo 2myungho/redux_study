@@ -17,4 +17,5 @@ test('Setting test', () => {
   fireEvent.click(li);
 
   console.log(logout.mock.results);
+  //test
 });
